@@ -4,12 +4,12 @@
   "type": "commonjs",
   "description": "oclif example Hello World CLI",
   "bin": {
-    "cli": "./bin/run"
+    "typed-env": "./bin/run"
   },
   "license": "MIT",
   "main": "dist/index.js",
   "files": [
-    "/bin",
+    "./bin",
     "/dist",
     "/npm-shrinkwrap.json",
     "/oclif.manifest.json"
@@ -44,11 +44,7 @@
       "@oclif/plugin-plugins"
     ],
     "topicSeparator": " ",
-    "topics": {
-      "hello": {
-        "description": "Say hello to the world and others"
-      }
-    }
+    "topics": {}
   },
   "scripts": {
     "build": "shx rm -rf dist && tsc -b",
