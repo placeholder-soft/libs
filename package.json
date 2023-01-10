@@ -2,7 +2,12 @@
   "name": "libs",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "build:typed-env": "nx build typed-env",
+    "build:typed-env-cli": "nx build typed-env-cli",
+    "build": "nx run-many --target=build",
+    "test": "nx run-many --target=test"
+  },
   "private": true,
   "devDependencies": {
     "@nrwl/eslint-plugin-nx": "15.4.5",
@@ -26,5 +31,11 @@
     "tsd": "^0.25.0",
     "tslib": "^2.3.0",
     "typescript": "~4.8.2"
+  },
+  "dependencies": {
+    "@oclif/core": "^1.23.2",
+    "@oclif/plugin-help": "^5.1.22",
+    "@oclif/plugin-plugins": "^2.1.12",
+    "ts-morph": "^17.0.1"
   }
 }

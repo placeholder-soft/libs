@@ -21,7 +21,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@phs/typed-env": ["packages/typed-env/src/index.ts"]
+      "@phs/typed-env": ["packages/typed-env/src/index.ts"],
+      "@phs/typed-env-cli": ["packages/typed-env-cli/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
