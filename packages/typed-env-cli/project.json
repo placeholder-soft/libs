@@ -4,6 +4,12 @@
   "sourceRoot": "packages/typed-env-cli/src",
   "projectType": "library",
   "targets": {
+    "prepack": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "cd packages/typed-env-cli && npx oclif manifest && npx oclif readme"
+      }
+    },
     "build-ts": {
       "executor": "@nrwl/js:tsc",
       "outputs": ["{options.outputPath}"],
@@ -13,12 +19,17 @@
         "tsConfig": "packages/typed-env-cli/tsconfig.lib.json",
         "assets": ["packages/typed-env-cli/*.md"]
       },
-      "defaultConfiguration": ""
+      "defaultConfiguration": "",
+      "dependsOn": ["prepack"]
     },
     "build": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "cp -r packages/typed-env-cli/bin dist/packages/typed-env-cli"
+        "command": "cp -r packages/typed-env-cli/bin dist/packages/typed-env-cli",
+        "outputPath": "dist/packages/typed-env-cli",
+        "main": "packages/typed-env-cli/src/index.ts",
+        "tsConfig": "packages/typed-env-cli/tsconfig.lib.json",
+        "assets": ["packages/typed-env-cli/*.md"]
       },
       "dependsOn": ["build-ts"]
     },
