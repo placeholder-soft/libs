@@ -1,0 +1,66 @@
+{
+  "name": "typed-env-cli",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/typed-env-cli/src",
+  "projectType": "library",
+  "targets": {
+    "postpack": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "rm -f oclif.manifest.json"
+      }
+    },
+    "prepack": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "cd packages/typed-env-cli && npx oclif manifest && npx oclif readme"
+      }
+    },
+    "build-ts": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/typed-env-cli",
+        "main": "packages/typed-env-cli/src/index.ts",
+        "tsConfig": "packages/typed-env-cli/tsconfig.lib.json",
+        "assets": ["packages/typed-env-cli/*.md"]
+      },
+      "defaultConfiguration": "",
+      "dependsOn": ["prepack"]
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "cp -r packages/typed-env-cli/bin dist/packages/typed-env-cli",
+        "outputPath": "dist/packages/typed-env-cli",
+        "main": "packages/typed-env-cli/src/index.ts",
+        "tsConfig": "packages/typed-env-cli/tsconfig.lib.json",
+        "assets": ["packages/typed-env-cli/*.md"]
+      },
+      "dependsOn": ["build-ts"]
+    },
+    "publish": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node tools/scripts/publish.mjs typed-env-cli {args.ver} {args.tag}"
+      },
+      "dependsOn": ["build"]
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/typed-env-cli/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/typed-env-cli/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
