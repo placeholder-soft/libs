@@ -1,0 +1,28 @@
+{
+  "name": "@phs/typed-env-cli",
+  "version": "0.0.1",
+  "lockfileVersion": 2,
+  "requires": true,
+  "packages": {
+    "": {
+      "name": "@phs/typed-env-cli",
+      "version": "0.0.1",
+      "license": "MIT",
+      "dependencies": {
+        "@oclif/core": "^1.23.2",
+        "@oclif/plugin-autocomplete": "^1.3.10",
+        "@oclif/plugin-help": "^5.1.22",
+        "@oclif/plugin-plugins": "^2.1.12",
+        "@oclif/plugin-update": "^3.0.12",
+        "@oclif/plugin-warn-if-update-available": "^2.0.18",
+        "ts-morph": "^17.0.1"
+      },
+      "bin": {
+        "typed-env": "bin/run"
+      },
+      "engines": {
+        "node": ">=12.0.0"
+      }
+    }
+  }
+}

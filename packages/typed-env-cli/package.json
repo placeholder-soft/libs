@@ -26,6 +26,12 @@
   "oclif": {
     "bin": "typed-env",
     "dirname": "typed-env-cli",
+    "macos": {
+      "identifier": "phs.typed-env.cli"
+    },
+    "win": {
+      "identifier": "phs.typed-env.cli"
+    },
     "commands": "../../dist/packages/typed-env-cli/src/commands",
     "plugins": [
       "@oclif/plugin-help",

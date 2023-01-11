@@ -1,11 +1,5 @@
 # typed-env-cli
 
-This library was generated with [Nx](https://nx.dev).
+typed-env-cli can help us better handle environment variables
 
-## Building
-
-Run `nx build typed-env-cli` to build the library.
-
-## Running unit tests
-
-Run `nx test typed-env-cli` to execute the unit tests via [Jest](https://jestjs.io).
+## [Help Documents](../../README.md#commands)
