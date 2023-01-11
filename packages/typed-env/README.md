@@ -1,5 +1,5 @@
-# typed-env-cli
+# typed-env
 
-typed-env-cli can help us better handle environment variables
+typed-env can help us better handle environment variables
 
-## [Help Documents](../../README.md#lib)
+## [Help Documents](https://github.com/placeholder-soft/libs#lib)
