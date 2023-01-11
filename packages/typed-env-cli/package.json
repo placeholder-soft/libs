@@ -2,7 +2,6 @@
   "name": "@placeholdersoft/typed-env-cli",
   "version": "0.0.3",
   "type": "commonjs",
-  "description": "oclif example Hello World CLI",
   "bin": {
     "typed-env": "./bin/run"
   },
