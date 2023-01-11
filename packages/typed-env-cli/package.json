@@ -1,6 +1,6 @@
 {
   "name": "@placeholdersoft/typed-env-cli",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "type": "commonjs",
   "bin": {
     "typed-env": "./bin/run"
@@ -33,7 +33,7 @@
     "win": {
       "identifier": "phs.typed-env.cli"
     },
-    "commands": "../../dist/packages/typed-env-cli/src/commands",
+    "commands": "./src/commands",
     "plugins": [
       "@oclif/plugin-help",
       "@oclif/plugin-plugins",
