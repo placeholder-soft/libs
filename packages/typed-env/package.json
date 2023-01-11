@@ -1,5 +1,18 @@
 {
-  "name": "@phs/typed-env",
-  "version": "0.0.1",
-  "type": "commonjs"
+  "name": "@placeholdersoft/typed-env",
+  "version": "0.0.3",
+  "type": "commonjs",
+  "license": "MIT",
+  "homepage": "https://github.com/placeholder-soft/libs",
+  "repository": "https://github.com/placeholder-soft/libs#usage-typed-env",
+  "keywords": [
+    "typed-env",
+    "typed-env-cli",
+    "environment variables",
+    "env",
+    "parser",
+    "env parser",
+    "typescript",
+    "typed"
+  ]
 }

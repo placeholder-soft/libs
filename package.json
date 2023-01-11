@@ -2,9 +2,15 @@
   "name": "libs",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "build:typed-env": "nx build typed-env",
+    "build:typed-env-cli": "nx build typed-env-cli",
+    "build": "nx run-many --target=build",
+    "test": "nx run-many --target=test"
+  },
   "private": true,
   "devDependencies": {
+    "@nrwl/devkit": "^15.4.5",
     "@nrwl/eslint-plugin-nx": "15.4.5",
     "@nrwl/jest": "15.4.5",
     "@nrwl/js": "15.4.5",
@@ -15,16 +21,28 @@
     "@types/node": "16.11.7",
     "@typescript-eslint/eslint-plugin": "^5.36.1",
     "@typescript-eslint/parser": "^5.36.1",
+    "chalk": "^4.1.2",
     "eslint": "~8.15.0",
     "eslint-config-prettier": "8.1.0",
     "jest": "28.1.1",
     "jest-environment-jsdom": "28.1.1",
     "nx": "15.4.5",
+    "oclif": "^3.4.3",
     "prettier": "^2.6.2",
     "ts-jest": "28.0.5",
     "ts-node": "10.9.1",
     "tsd": "^0.25.0",
     "tslib": "^2.3.0",
     "typescript": "~4.8.2"
+  },
+  "dependencies": {
+    "@oclif/core": "^1.23.2",
+    "@oclif/plugin-autocomplete": "^1.3.10",
+    "@oclif/plugin-help": "^5.1.22",
+    "@oclif/plugin-legacy": "^1.2.7",
+    "@oclif/plugin-plugins": "^2.1.12",
+    "@oclif/plugin-update": "^3.0.12",
+    "@oclif/plugin-warn-if-update-available": "^2.0.18",
+    "ts-morph": "^17.0.1"
   }
 }
