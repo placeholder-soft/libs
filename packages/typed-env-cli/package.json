@@ -1,5 +1,5 @@
 {
-  "name": "@phs/typed-env-cli",
+  "name": "@placeholdersoft/typed-env-cli",
   "version": "0.0.1",
   "type": "commonjs",
   "description": "oclif example Hello World CLI",

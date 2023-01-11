@@ -1,4 +1,4 @@
-import { typedEnv } from '@phs/typed-env';
+import { typedEnv } from '@placeholdersoft/typed-env';
 
 typedEnv('bbb').required().default('111').toInt(111);
 typedEnv('bbb').default('222').required().toInt(222);
