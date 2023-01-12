@@ -42,9 +42,9 @@ USAGE
   $ typed-env diff-env -p <value> -a <value> [-o <value>]
 
 FLAGS
-  -a, --after-env=<value>  (required) enter change env json
+  -a, --after-env=<value>  (required) enter change env
   -o, --output=<value>     enter the output file path
-  -p, --prev-env=<value>   (required) enter current env json
+  -p, --prev-env=<value>   (required) enter current env
 
 DESCRIPTION
   Output diff env
@@ -52,7 +52,7 @@ DESCRIPTION
 EXAMPLES
     $ typed-env diff-env -p "$(prev_env)" -a "$(env)"
     output:
-         prev_env: {a: 1} env: {b: 1} -> {b: 1}
+         prev_env: a=1 env: a=1 b=1 -> b=1
 ```
 
 ### `diff-env-name-type`
@@ -64,9 +64,9 @@ USAGE
   $ typed-env diff-env-name-type -p <value> -a <value> [-o <value>]
 
 FLAGS
-  -a, --after-env=<value>  (required) enter change env json
+  -a, --after-env=<value>  (required) enter change env
   -o, --output=<value>     enter the output file path
-  -p, --prev-env=<value>   (required) enter current env json
+  -p, --prev-env=<value>   (required) enter current env
 
 DESCRIPTION
   Output diff env name type definition
@@ -85,7 +85,7 @@ USAGE
 
 FLAGS
   -o, --output=<value>       enter the output file path
-  -s, --source-file=<value>  (required) enter the file path to check
+  -s, --source-file=<value>  (required) enter the file path(.ts) to check
   -t, --tsconfig=<value>     (required) enter the tsconfig.json path
 
 DESCRIPTION
@@ -105,7 +105,7 @@ USAGE
 
 FLAGS
   -o, --output=<value>       enter the output file path
-  -s, --source-file=<value>  (required) enter the file path to check
+  -s, --source-file=<value>  (required) enter the file path(.ts) to check
   -t, --tsconfig=<value>     (required) enter the tsconfig.json path
 
 DESCRIPTION
@@ -125,7 +125,7 @@ USAGE
 
 FLAGS
   -o, --output=<value>       enter the output file path
-  -s, --source-file=<value>  (required) enter the file path to check
+  -s, --source-file=<value>  (required) enter the file path(.ts) to check
   -t, --tsconfig=<value>     (required) enter the tsconfig.json path
 
 DESCRIPTION

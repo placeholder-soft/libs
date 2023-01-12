@@ -12,7 +12,7 @@ export default class GenTypedEnvCallUsageReport extends Command {
   static override flags = {
     'source-file': Flags.string({
       char: 's',
-      description: 'enter the file path to check',
+      description: 'enter the file path(.ts) to check',
       required: true,
     }),
 

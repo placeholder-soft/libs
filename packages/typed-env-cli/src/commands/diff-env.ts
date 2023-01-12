@@ -10,20 +10,20 @@ export default class DiffEnv extends Command {
   $ typed-env diff-env -p "$(prev_env)" -a "$(env)" -o ./src/.env
 
   output:
-       prev_env: {a: 1} env: {b: 1} -> {b: 1}
+       prev_env: a=1 env: a=1 b=1 -> b=1
   `,
   ];
 
   static override flags = {
     'prev-env': Flags.string({
       char: 'p',
-      description: 'enter current env json',
+      description: 'enter current env',
       required: true,
     }),
 
     'after-env': Flags.string({
       char: 'a',
-      description: 'enter change env json',
+      description: 'enter change env',
       required: true,
     }),
 

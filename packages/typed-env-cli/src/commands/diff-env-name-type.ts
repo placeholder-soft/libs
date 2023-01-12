@@ -12,13 +12,13 @@ export default class DiffEnvNameType extends Command {
   static override flags = {
     'prev-env': Flags.string({
       char: 'p',
-      description: 'enter current env json',
+      description: 'enter current env',
       required: true,
     }),
 
     'after-env': Flags.string({
       char: 'a',
-      description: 'enter change env json',
+      description: 'enter change env',
       required: true,
     }),
 
