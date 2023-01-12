@@ -1,9 +1,14 @@
 import { Dict, EnvBox } from './env-box';
 
-/**
- * default env source is process.env, if you want to use other env source, you can use injectGlobalEnv
- */
-let __GLOBAL_ENV__ = process?.env ?? {};
+let __GLOBAL_ENV__ = {};
+
+try {
+  /**
+   * default env source is process.env, if you want to use other env source, you can use injectGlobalEnv
+   */
+  __GLOBAL_ENV__ = process.env;
+  // eslint-disable-next-line no-empty
+} catch (e) {}
 
 /**
  * Set the global environment for the current process.
