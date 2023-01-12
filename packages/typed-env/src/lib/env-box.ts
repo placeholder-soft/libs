@@ -1,7 +1,9 @@
-import * as process from "process";
-
 type EnvBoxValueType = string | undefined;
 type DefinedAs<T, U> = T extends undefined ? U | undefined : U;
+
+export interface Dict<T> {
+  [key: string]: T | undefined;
+}
 
 export class EnvBox<T extends EnvBoxValueType> {
   constructor(readonly name: string, private readonly value: T) {}
@@ -23,17 +25,17 @@ export class EnvBox<T extends EnvBoxValueType> {
     return new EnvBox(this.name, this.value ?? value);
   }
   nonEmpty() {
-    if (this.value == null || this.value === "") {
+    if (this.value == null || this.value === '') {
       throw new Error(`Env variable for name: ${this.name} is empty`);
     }
     return new EnvBox(this.name, this.value);
   }
   toBoolean() {
     const value = this.value;
-    if (value === "true" || value === "TRUE") {
+    if (value === 'true' || value === 'TRUE') {
       return true;
     }
-    if (value === "false" || value === "FALSE") {
+    if (value === 'false' || value === 'FALSE') {
       return false;
     }
 
@@ -58,8 +60,7 @@ export class EnvBox<T extends EnvBoxValueType> {
     return this.value;
   }
 
-  static of<T extends string>(name: T) {
-    const val = process.env[name];
-    return new EnvBox(name, val);
+  static of<T extends string>(name: T, env: Dict<string>) {
+    return new EnvBox(name, env[name]);
   }
 }
