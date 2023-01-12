@@ -1,6 +1,6 @@
 {
   "name": "@placeholdersoft/typed-env-cli",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "type": "commonjs",
   "bin": {
     "typed-env": "./bin/run"
