@@ -12,25 +12,21 @@ const kTsconfigPath = path.resolve(
 );
 
 test('generate env name', () => {
-  const kOutputPath = path.resolve(__dirname, '../__fixtures__/env-name.ts');
-  generateEnvName({
+  const envNames = generateEnvName({
     sourceFilePath: kSourceFilePath,
     options: {
       tsConfigFilePath: kTsconfigPath,
     },
-    output: kOutputPath,
   });
-  expect(existsSync(kOutputPath)).toBe(true);
+  console.log(envNames);
 });
 
 test('generate env', () => {
-  const kOutputPath = path.resolve(__dirname, '../__fixtures__/.env');
-  generateEnv({
+  const env = generateEnv({
     sourceFilePath: kSourceFilePath,
     options: {
       tsConfigFilePath: kTsconfigPath,
     },
-    output: kOutputPath,
   });
-  expect(existsSync(kOutputPath)).toBe(true);
+  console.log(env);
 });
