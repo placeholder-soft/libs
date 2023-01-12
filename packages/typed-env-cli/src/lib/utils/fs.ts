@@ -30,3 +30,12 @@ export const ensureDirSync = (dir: string, options?: Option) => {
     recursive: true,
   });
 };
+
+export const outputFile = (filePath: string, fileContent: string) => {
+  const output = path.resolve(filePath);
+  const folderPath = path.parse(output);
+  ensureDirSync(folderPath.dir);
+  fs.writeFileSync(output, fileContent);
+
+  console.log(`output file: ${output}`);
+};

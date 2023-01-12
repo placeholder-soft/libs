@@ -1,7 +1,5 @@
 import { Command, Flags } from '@oclif/core';
-import path from 'path';
-import fs from 'fs';
-import { ensureDirSync } from '../lib/utils/fs';
+import { outputFile } from '../lib/utils/fs';
 import { generateEnv } from '../lib/generate-env';
 
 export default class GenEnv extends Command {
@@ -39,21 +37,7 @@ export default class GenEnv extends Command {
     });
 
     if (flags.output) {
-      const tempstats = fs.statSync(flags.output);
-
-      if (tempstats.isDirectory()) {
-        ensureDirSync(flags.output);
-        const outputFilePath = path.join(flags.output, '.env');
-        fs.writeFileSync(outputFilePath, info.join('\n'));
-
-        console.log(`output file: ${outputFilePath}`);
-      } else {
-        const folderPath = path.parse(flags.output);
-        ensureDirSync(folderPath.dir);
-        fs.writeFileSync(flags.output, info.join('\n'));
-
-        console.log(`output file: ${flags.output}`);
-      }
+      outputFile(flags.output, info.join('\n'));
     } else {
       console.log(info);
     }

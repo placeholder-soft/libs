@@ -1,15 +1,13 @@
 import { Command, Flags } from '@oclif/core';
+import { outputFile } from '../lib/utils/fs';
 import { parseEnv } from '../lib/utils/util';
-import path from 'path';
-import fs from 'fs';
-import { ensureDirSync } from '../lib/utils/fs';
 
 export default class DiffEnv extends Command {
   static override description = 'Output diff env';
 
   static override examples = [
     `
-  $ typed-env diff-env -p "$(prev_env)" -a "$(env)"
+  $ typed-env diff-env -p "$(prev_env)" -a "$(env)" -o ./src/.env
 
   output:
        prev_env: {a: 1} env: {b: 1} -> {b: 1}
@@ -50,21 +48,7 @@ export default class DiffEnv extends Command {
     }
 
     if (flags.output) {
-      const tempstats = fs.statSync(flags.output);
-
-      if (tempstats.isDirectory()) {
-        ensureDirSync(flags.output);
-        const outputFilePath = path.join(flags.output, '.env');
-        fs.writeFileSync(outputFilePath, env.join('\n'));
-
-        console.log(`output file: ${outputFilePath}`);
-      } else {
-        const folderPath = path.parse(flags.output);
-        ensureDirSync(folderPath.dir);
-        fs.writeFileSync(flags.output, env.join('\n'));
-
-        console.log(`output file: ${flags.output}`);
-      }
+      outputFile(flags.output, env.join('\n'));
     } else {
       console.log(env.join('\n'));
     }

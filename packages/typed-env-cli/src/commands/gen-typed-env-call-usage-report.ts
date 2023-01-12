@@ -1,8 +1,6 @@
 import { Command, Flags } from '@oclif/core';
-import path from 'path';
-import fs from 'fs';
 import { generateTypedEnvCallUsageReport } from '../lib/generate-typed-env-call-usage-report';
-import { ensureDirSync } from '../lib/utils/fs';
+import { outputFile } from '../lib/utils/fs';
 
 export default class GenTypedEnvCallUsageReport extends Command {
   static override description = 'Generate typed-env call usage report';
@@ -39,24 +37,7 @@ export default class GenTypedEnvCallUsageReport extends Command {
     });
 
     if (flags.output) {
-      const tempstats = fs.statSync(flags.output);
-
-      if (tempstats.isDirectory()) {
-        ensureDirSync(flags.output);
-        const outputFilePath = path.join(
-          flags.output,
-          'typed-env-call-usage-report.json'
-        );
-        fs.writeFileSync(outputFilePath, JSON.stringify(info));
-
-        console.log(`output file: ${outputFilePath}`);
-      } else {
-        const folderPath = path.parse(flags.output);
-        ensureDirSync(folderPath.dir);
-        fs.writeFileSync(flags.output, JSON.stringify(info));
-
-        console.log(`output file: ${flags.output}`);
-      }
+      outputFile(flags.output, JSON.stringify(info, null, 4));
     } else {
       console.log(info);
     }
