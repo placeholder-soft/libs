@@ -4,11 +4,16 @@ import path from 'path';
 import fs from 'fs';
 import { ensureDirSync } from '../lib/utils/fs';
 
-export default class GenDiffEnvNameType extends Command {
-  static override description = 'Generate diff env name type definition';
+export default class DiffEnv extends Command {
+  static override description = 'Output diff env';
 
   static override examples = [
-    `$ typed-env diff-env-name -p "$(env)" -a "$(env)"`,
+    `
+  $ typed-env diff-env -p "$(prev_env)" -a "$(env)"
+
+  output:
+       prev_env: {a: 1} env: {b: 1} -> {b: 1}
+  `,
   ];
 
   static override flags = {
@@ -31,44 +36,37 @@ export default class GenDiffEnvNameType extends Command {
   };
 
   async run(): Promise<void> {
-    const { flags } = await this.parse(GenDiffEnvNameType);
+    const { flags } = await this.parse(DiffEnv);
 
     const prev = parseEnv(flags['prev-env']);
     const after = parseEnv(flags['after-env']);
 
-    const envNames: { [key in string]: string } = {};
-    for (const [k] of Object.entries(after)) {
-      // only print changed vars
+    const env: string[] = [];
+
+    for (const [k, v] of Object.entries(after)) {
       if (prev[k] !== after[k]) {
-        envNames[k] = k;
+        env.push(`${k}=${v}`);
       }
     }
-
-    const fileContent = `export const AllProjectDiffEnvNames = ${JSON.stringify(
-      envNames,
-      null,
-      2
-    )} as const;
-export type ProjectDiffEnvName = keyof typeof AllProjectDiffEnvNames;`;
 
     if (flags.output) {
       const tempstats = fs.statSync(flags.output);
 
       if (tempstats.isDirectory()) {
         ensureDirSync(flags.output);
-        const outputFilePath = path.join(flags.output, 'env.d.ts');
-        fs.writeFileSync(outputFilePath, fileContent);
+        const outputFilePath = path.join(flags.output, '.env');
+        fs.writeFileSync(outputFilePath, env.join('\n'));
 
         console.log(`output file: ${outputFilePath}`);
       } else {
         const folderPath = path.parse(flags.output);
         ensureDirSync(folderPath.dir);
-        fs.writeFileSync(flags.output, fileContent);
+        fs.writeFileSync(flags.output, env.join('\n'));
 
         console.log(`output file: ${flags.output}`);
       }
     } else {
-      console.log(fileContent);
+      console.log(env.join('\n'));
     }
   }
 }

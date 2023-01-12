@@ -6,8 +6,8 @@ typed-env can help us better handle environment variables
 
 ### [commands](#usage-typed-env-cli)
 
-- [gen-diff-env](#gen-diff-env)
-- [gen-diff-env-name-type](#gen-diff-env-name-type)
+- [diff-env](#diff-env)
+- [diff-env-name-type](#diff-env-name-type)
 - [gen-env](#gen-env)
 - [gen-env-name-type](#gen-env-name-type)
 - [gen-typed-env-call-usage-report](#gen-typed-env-call-usage-report)
@@ -33,42 +33,46 @@ $ npm install @placeholdersoft/typed-env
 
 ## Usage typed-env-cli
 
-### `gen-diff-env`
+### `diff-env`
 
 ```
-Generate diff env
+Output diff env
 
 USAGE
-  $ typed-env gen-diff-env -p <value> -a <value>
+  $ typed-env diff-env -p <value> -a <value> [-o <value>]
 
 FLAGS
   -a, --after-env=<value>  (required) enter change env json
+  -o, --output=<value>     enter the output file path
   -p, --prev-env=<value>   (required) enter current env json
 
 DESCRIPTION
   Output diff env
 
 EXAMPLES
-  $ typed-env diff-env -p "$(env)" -a "$(env)"
+    $ typed-env diff-env -p "$(prev_env)" -a "$(env)"
+    output:
+         prev_env: {a: 1} env: {b: 1} -> {b: 1}
 ```
 
-### `gen-diff-env-name-type`
+### `diff-env-name-type`
 
 ```
-Generate diff env name type definition
+Output diff env name type definition
 
 USAGE
-  $ typed-env gen-diff-env-name-type -p <value> -a <value>
+  $ typed-env diff-env-name-type -p <value> -a <value> [-o <value>]
 
 FLAGS
   -a, --after-env=<value>  (required) enter change env json
+  -o, --output=<value>     enter the output file path
   -p, --prev-env=<value>   (required) enter current env json
 
 DESCRIPTION
-  Output diff env name
+  Output diff env name type definition
 
 EXAMPLES
-  $ typed-env gen-diff-env-name-type -p "$(env)" -a "$(env)"
+  $ typed-env diff-env-name-type -p "$(prev_env)" -a "$(env)"
 ```
 
 ### `gen-env`
