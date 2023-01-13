@@ -2,11 +2,11 @@ import { Command, Flags } from '@oclif/core';
 import { outputFile } from '../lib/utils/fs';
 import { parseEnv } from '../lib/utils/util';
 
-export default class DiffEnvNameType extends Command {
+export default class DiffEnvName extends Command {
   static override description = 'Output diff env name type definition';
 
   static override examples = [
-    `$ typed-env diff-env-name-type -p "$(prev_env)" -a "$(env)" -o ./src/env.d.ts`,
+    `$ typed-env diff-env-name -p "$(prev_env)" -a "$(env)" -o ./src/env.d.ts`,
   ];
 
   static override flags = {
@@ -29,7 +29,7 @@ export default class DiffEnvNameType extends Command {
   };
 
   async run(): Promise<void> {
-    const { flags } = await this.parse(DiffEnvNameType);
+    const { flags } = await this.parse(DiffEnvName);
 
     const prev = parseEnv(flags['prev-env']);
     const after = parseEnv(flags['after-env']);

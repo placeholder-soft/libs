@@ -1,24 +1,18 @@
 import { Command, Flags } from '@oclif/core';
+import { generateDotEnvName } from '../lib/generate-env';
 import { outputFile } from '../lib/utils/fs';
-import { generateEnvName } from '../lib/generate-env';
 
-export default class GenEnvNameType extends Command {
-  static override description = 'Generate env name type definition';
+export default class GenDotEnvName extends Command {
+  static override description = 'Generate .env name type definition';
 
   static override examples = [
-    `$ typed-env gen-env-name-type -s ./src/index.ts -t ./tsconfig.json -o ./src/env.d.ts`,
+    `$ typed-env gen-dot-env-name -s .env -o ./src/env.d.ts`,
   ];
 
   static override flags = {
     'source-file': Flags.string({
       char: 's',
-      description: 'enter the file path(.ts) to check',
-      required: true,
-    }),
-
-    tsconfig: Flags.string({
-      char: 't',
-      description: 'enter the tsconfig.json path',
+      description: 'enter the file path to check',
       required: true,
     }),
 
@@ -29,12 +23,9 @@ export default class GenEnvNameType extends Command {
   };
 
   async run(): Promise<void> {
-    const { flags } = await this.parse(GenEnvNameType);
+    const { flags } = await this.parse(GenDotEnvName);
 
-    const envNames = generateEnvName({
-      sourceFilePath: flags['source-file'],
-      options: { tsConfigFilePath: flags.tsconfig },
-    });
+    const envNames = generateDotEnvName(flags['source-file']);
 
     const fileContent = `export const AllProjectEnvNames = ${JSON.stringify(
       envNames,

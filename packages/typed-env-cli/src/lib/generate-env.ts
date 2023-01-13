@@ -1,10 +1,12 @@
-import { uniqBy } from './utils/util';
+import { parseEnv, uniqBy } from './utils/util';
 import {
   generateTypedEnvCallUsageReport,
   Report,
 } from './generate-typed-env-call-usage-report';
+import fs from 'fs';
+import path from 'path';
 
-export const generateEnvName = (arg: Report) => {
+export const generateEnvNameByTypedEnv = (arg: Report) => {
   const envNames = generateTypedEnvCallUsageReport(arg).envNames.reduce(
     (pre, current) => {
       return {
@@ -18,7 +20,7 @@ export const generateEnvName = (arg: Report) => {
   return envNames;
 };
 
-export const generateEnv = (arg: Report) => {
+export const generateEnvByTypedEnv = (arg: Report) => {
   const report = generateTypedEnvCallUsageReport(arg);
 
   const envValue = report.envNames.reduce<string[]>((acc, cur) => {
@@ -46,4 +48,18 @@ export const generateEnv = (arg: Report) => {
   }, []);
 
   return envValue;
+};
+
+export const generateDotEnvName = (envPath: string) => {
+  const filePath = path.resolve(envPath);
+  if (!fs.existsSync(filePath)){
+    throw new Error(`File not found: ${filePath}`);
+  }
+  const env = fs.readFileSync(filePath, {encoding: 'utf-8'});
+  const envJson = parseEnv(env);
+  const envNames: { [key in string]: string } = {};
+  for (const [k] of Object.entries(envJson)) {
+      envNames[k] = k;
+  }
+  return envNames;
 };
