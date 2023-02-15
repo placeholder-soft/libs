@@ -23,17 +23,54 @@ export class BigQueryStore<
     });
   }
 
-  readonly ensureTable = memoizee(
-    async (tableName: T) => {
+  readonly ensureDataset = memoizee(
+    async () => {
       const dataset = this.bq.dataset(this.datasetId, {
         location: 'US',
       });
-      const table = dataset.table(tableName);
       const tryCreate = async () => {
         const [datasetExists] = await dataset.exists();
         if (!datasetExists) {
           await dataset.create();
         }
+        return dataset;
+      };
+      try {
+        return await tryCreate();
+      } catch (e) {
+        if (e instanceof Error) {
+          console.warn(
+            `Fail to create biquery dataset ${
+              this.datasetId
+            }, will retry once, error: ${e.stack ?? e}`
+          );
+        }
+
+        // Retry once in case that the table is created through another instance.
+        return await tryCreate();
+      }
+    },
+    {
+      promise: true,
+      maxAge: 60000,
+    }
+  );
+
+  readonly deleteDataset = memoizee(
+    async (force?: boolean) => {
+      await this.bq.dataset(this.datasetId).delete({ force });
+    },
+    {
+      promise: true,
+      maxAge: 60000,
+    }
+  );
+
+  readonly ensureTable = memoizee(
+    async (tableName: T) => {
+      const dataset = await this.ensureDataset();
+      const table = dataset.table(tableName);
+      const tryCreate = async () => {
         const [tableExists] = await table.exists();
         if (!tableExists) {
           const options: TableMetadata = {
@@ -63,6 +100,19 @@ export class BigQueryStore<
         // Retry once in case that the table is created through another instance.
         return await tryCreate();
       }
+    },
+    {
+      promise: true,
+      maxAge: 60000,
+    }
+  );
+
+  readonly deleteTable = memoizee(
+    async (tableName: T) => {
+      await this.bq
+        .dataset(this.datasetId)
+        .table(tableName)
+        .delete({ ignoreNotFound: true });
     },
     {
       promise: true,

@@ -22,16 +22,32 @@ const projectId = 'shopify-cloud-0';
 const datasetId = 'tiktok_appstore';
 
 describe('bigquery store', () => {
-  it('should work', async () => {
-    const store = new BigQueryStore<TikTokPageModels, TikTokModelName>(
-      {
-        projectId,
-        keyFilename,
-      },
-      datasetId,
-      getBigQuerySchemaByTikTok
-    );
+  const store = new BigQueryStore<TikTokPageModels, TikTokModelName>(
+    {
+      projectId,
+      keyFilename,
+    },
+    datasetId,
+    getBigQuerySchemaByTikTok
+  );
 
+  it('ensure dataset', async () => {
+    await store.ensureDataset();
+  });
+
+  it('del dataset', async () => {
+    await store.deleteDataset(true);
+  });
+
+  it('ensure table', async () => {
+    await store.ensureTable('sitemap');
+  });
+
+  it('del table', async () => {
+    await store.deleteTable('sitemap');
+  });
+
+  it('should work', async () => {
     await store.ensureTable('sitemap');
 
     const sitemapRows: TikTokSitemapPageModel[] = new Array(1)
