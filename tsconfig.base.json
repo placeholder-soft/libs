@@ -21,6 +21,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@placeholdersoft/helpers": ["packages/helpers/src/index.ts"],
       "@placeholdersoft/typed-env": ["packages/typed-env/src/index.ts"],
       "@placeholdersoft/typed-env-cli": ["packages/typed-env-cli/src/index.ts"]
     }
