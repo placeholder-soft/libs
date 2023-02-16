@@ -77,6 +77,7 @@ export function generateCallUsageReport<T>(
     chainCallFuncNames,
     analysisPathIgnorePatterns,
   });
-
-  return convertData ? convertData(result) : result;
+  return convertData
+    ? convertData(result, { compilerOptions: project.compilerOptions.get() })
+    : result;
 }

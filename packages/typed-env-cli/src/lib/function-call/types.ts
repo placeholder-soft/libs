@@ -125,7 +125,12 @@ export type TGenerateCallUsageReport<T> = TGenerateCallUsageReportBase & {
    * @param v call usage args
    * @returns data
    */
-  convertData: (v: TParseParameters[][]) => T;
+  convertData: (
+    v: TParseParameters[][],
+    opt: {
+      compilerOptions: ts.CompilerOptions;
+    }
+  ) => T;
 };
 
 /**
