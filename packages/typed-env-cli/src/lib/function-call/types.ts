@@ -22,6 +22,9 @@ import {
   ThrowStatement,
   TryStatement,
   DebuggerStatement,
+  TemplateSpan,
+  CaseClause,
+  DefaultClause,
 } from 'ts-morph';
 
 export type TStatement =
@@ -44,9 +47,15 @@ export type TStatement =
   | TryStatement
   | DebuggerStatement;
 
-export type TSource =
-  | TStatement
-  | (SourceFile | Block | CallExpression<ts.CallExpression>);
+export type TSingleSource =
+  | SourceFile
+  | Block
+  | CallExpression<ts.CallExpression>
+  | TemplateSpan
+  | CaseClause
+  | DefaultClause;
+
+export type TSource = TStatement | TSingleSource;
 
 export type TParseParameters = {
   /**
