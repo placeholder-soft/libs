@@ -25,6 +25,7 @@ import {
   TemplateSpan,
   CaseClause,
   DefaultClause,
+  FunctionDeclaration,
 } from 'ts-morph';
 
 export type TStatement =
@@ -45,7 +46,8 @@ export type TStatement =
   | LabeledStatement
   | ThrowStatement
   | TryStatement
-  | DebuggerStatement;
+  | DebuggerStatement
+  | FunctionDeclaration;
 
 export type TSingleSource =
   | SourceFile
