@@ -2,13 +2,26 @@
 
 exports[`assignment generate env 1`] = `
 Array [
-  "eee=",
-  "NODE_ENV=",
-  "aaa=",
-  "ccc=",
+  "DOCKER_COMPOSE_POSTGRES_PORT=",
+  "UNIWHALE_DB_NAME=",
   "DATA_SYNC_NFT_ENABLED=",
   "DATA_SYNC_TRADE_ENABLED=",
   "DATA_SYNC_PYTH_ENABLED=",
+  "if=",
+  "elseif=",
+  "swticch=",
+  "swticch-case=",
+  "swticch-case-2=",
+  "swticch-default-block=",
+  "do=",
+  "while=",
+  "aaa=",
+  "ccc=",
+  "if-block=",
+  "elseif-block=",
+  "else-block=",
+  "swticch-case-block=",
+  "swticch-case-2-block=",
 ]
 `;
 
@@ -17,30 +30,22 @@ Object {
   "DATA_SYNC_NFT_ENABLED": "DATA_SYNC_NFT_ENABLED",
   "DATA_SYNC_PYTH_ENABLED": "DATA_SYNC_PYTH_ENABLED",
   "DATA_SYNC_TRADE_ENABLED": "DATA_SYNC_TRADE_ENABLED",
-  "NODE_ENV": "NODE_ENV",
+  "DOCKER_COMPOSE_POSTGRES_PORT": "DOCKER_COMPOSE_POSTGRES_PORT",
+  "UNIWHALE_DB_NAME": "UNIWHALE_DB_NAME",
   "aaa": "aaa",
   "ccc": "ccc",
-  "eee": "eee",
-}
-`;
-
-exports[`call chaining generate env 1`] = `
-Array [
-  "// default=['111','222','333']",
-  "bbb='111'",
-  "// default=['111','222','333']",
-  "ccc='111'",
-  "ddd=",
-  "// default=['']",
-  "eee=",
-]
-`;
-
-exports[`call chaining generate env name 1`] = `
-Object {
-  "bbb": "bbb",
-  "ccc": "ccc",
-  "ddd": "ddd",
-  "eee": "eee",
+  "do": "do",
+  "else-block": "else-block",
+  "elseif": "elseif",
+  "elseif-block": "elseif-block",
+  "if": "if",
+  "if-block": "if-block",
+  "swticch": "swticch",
+  "swticch-case": "swticch-case",
+  "swticch-case-2": "swticch-case-2",
+  "swticch-case-2-block": "swticch-case-2-block",
+  "swticch-case-block": "swticch-case-block",
+  "swticch-default-block": "swticch-default-block",
+  "while": "while",
 }
 `;

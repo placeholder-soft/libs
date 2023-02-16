@@ -31,6 +31,8 @@ function callUsageArgs<T>(args: TCallUsageArgs): TParseParameters[][] {
     })
   );
 
+  // console.log(JSON.stringify(result, null , 4));
+
   const files = sourceFile.getReferencedSourceFiles();
   if (files.length > 0) {
     for (const f of files) {
