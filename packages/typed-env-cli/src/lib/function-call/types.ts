@@ -5,12 +5,14 @@ import {
   ProjectOptions,
   SourceFile,
   ts,
+  VariableStatement,
 } from 'ts-morph';
 
 export type TSource =
   | SourceFile
   | Block
   | ExpressionStatement
+  | VariableStatement
   | CallExpression<ts.CallExpression>;
 
 export type TParseParameters = {

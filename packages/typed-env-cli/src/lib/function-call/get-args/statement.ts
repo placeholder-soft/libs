@@ -23,5 +23,19 @@ export function getCallUsageArgsFromStatement(
     result && argsInfo.push(result);
   }
 
+  const variableStatements = source.getDescendantsOfKind(
+    SyntaxKind.VariableStatement
+  );
+
+  for (const es of variableStatements) {
+    const result = getArgsFromCall({
+      source: es,
+      filePath,
+      chainCallFuncNames,
+    });
+
+    result && argsInfo.push(result);
+  }
+
   return argsInfo;
 }
