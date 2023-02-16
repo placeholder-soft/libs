@@ -1,5 +1,10 @@
 import { SyntaxKind } from 'ts-morph';
-import { TGetArgsFromExpression, TParseParameters } from '../types';
+import {
+  TGetArgsFromExpression,
+  TParseParameters,
+  TSource,
+  TStatement,
+} from '../types';
 import { getArgsFromCall } from './call';
 
 export function getCallUsageArgsFromStatement(
@@ -7,35 +12,38 @@ export function getCallUsageArgsFromStatement(
 ): TParseParameters[][] {
   const { source, filePath, chainCallFuncNames } = args;
 
-  const argsInfo: TParseParameters[][] = [];
-
-  const expressionStatements = source.getDescendantsOfKind(
-    SyntaxKind.ExpressionStatement
-  );
-
-  for (const es of expressionStatements) {
+  return getAllStatment(source).reduce<TParseParameters[][]>((acc, cur) => {
     const result = getArgsFromCall({
-      source: es,
+      source: cur,
       filePath,
       chainCallFuncNames,
     });
 
-    result && argsInfo.push(result);
-  }
+    result && acc.push(result);
 
-  const variableStatements = source.getDescendantsOfKind(
-    SyntaxKind.VariableStatement
-  );
+    return acc;
+  }, []);
+}
 
-  for (const es of variableStatements) {
-    const result = getArgsFromCall({
-      source: es,
-      filePath,
-      chainCallFuncNames,
-    });
-
-    result && argsInfo.push(result);
-  }
-
-  return argsInfo;
+function getAllStatment(source: TSource): TStatement[] {
+  return [
+    ...source.getDescendantsOfKind(SyntaxKind.EmptyStatement),
+    ...source.getDescendantsOfKind(SyntaxKind.VariableStatement),
+    ...source.getDescendantsOfKind(SyntaxKind.ExpressionStatement),
+    ...source.getDescendantsOfKind(SyntaxKind.IfStatement),
+    ...source.getDescendantsOfKind(SyntaxKind.DoStatement),
+    ...source.getDescendantsOfKind(SyntaxKind.WhileStatement),
+    ...source.getDescendantsOfKind(SyntaxKind.ForStatement),
+    ...source.getDescendantsOfKind(SyntaxKind.ForInStatement),
+    ...source.getDescendantsOfKind(SyntaxKind.ForOfStatement),
+    ...source.getDescendantsOfKind(SyntaxKind.ContinueStatement),
+    ...source.getDescendantsOfKind(SyntaxKind.BreakStatement),
+    ...source.getDescendantsOfKind(SyntaxKind.ReturnStatement),
+    ...source.getDescendantsOfKind(SyntaxKind.WithStatement),
+    ...source.getDescendantsOfKind(SyntaxKind.SwitchStatement),
+    ...source.getDescendantsOfKind(SyntaxKind.LabeledStatement),
+    ...source.getDescendantsOfKind(SyntaxKind.ThrowStatement),
+    ...source.getDescendantsOfKind(SyntaxKind.TryStatement),
+    ...source.getDescendantsOfKind(SyntaxKind.DebuggerStatement),
+  ];
 }

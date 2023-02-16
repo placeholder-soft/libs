@@ -2,14 +2,22 @@
 
 exports[`assignment generate env 1`] = `
 Array [
+  "eee=",
+  "NODE_ENV=",
   "aaa=",
   "ccc=",
-  "eee=",
+  "DATA_SYNC_NFT_ENABLED=",
+  "DATA_SYNC_TRADE_ENABLED=",
+  "DATA_SYNC_PYTH_ENABLED=",
 ]
 `;
 
 exports[`assignment generate env name 1`] = `
 Object {
+  "DATA_SYNC_NFT_ENABLED": "DATA_SYNC_NFT_ENABLED",
+  "DATA_SYNC_PYTH_ENABLED": "DATA_SYNC_PYTH_ENABLED",
+  "DATA_SYNC_TRADE_ENABLED": "DATA_SYNC_TRADE_ENABLED",
+  "NODE_ENV": "NODE_ENV",
   "aaa": "aaa",
   "ccc": "ccc",
   "eee": "eee",

@@ -1,19 +1,52 @@
 import {
   Block,
   CallExpression,
-  ExpressionStatement,
   ProjectOptions,
   SourceFile,
   ts,
+  EmptyStatement,
   VariableStatement,
+  ExpressionStatement,
+  IfStatement,
+  DoStatement,
+  WhileStatement,
+  ForStatement,
+  ForInStatement,
+  ForOfStatement,
+  ContinueStatement,
+  BreakStatement,
+  ReturnStatement,
+  WithStatement,
+  SwitchStatement,
+  LabeledStatement,
+  ThrowStatement,
+  TryStatement,
+  DebuggerStatement,
 } from 'ts-morph';
 
-export type TSource =
-  | SourceFile
-  | Block
-  | ExpressionStatement
+export type TStatement =
+  | EmptyStatement
   | VariableStatement
-  | CallExpression<ts.CallExpression>;
+  | ExpressionStatement
+  | IfStatement
+  | DoStatement
+  | WhileStatement
+  | ForStatement
+  | ForInStatement
+  | ForOfStatement
+  | ContinueStatement
+  | BreakStatement
+  | ReturnStatement
+  | WithStatement
+  | SwitchStatement
+  | LabeledStatement
+  | ThrowStatement
+  | TryStatement
+  | DebuggerStatement;
+
+export type TSource =
+  | TStatement
+  | (SourceFile | Block | CallExpression<ts.CallExpression>);
 
 export type TParseParameters = {
   /**
