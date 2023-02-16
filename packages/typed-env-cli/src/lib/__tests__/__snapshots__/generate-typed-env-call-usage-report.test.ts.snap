@@ -1,0 +1,169 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generate typeEnv call usage report 1`] = `
+Object {
+  "data": Object {
+    "bbb": Object {
+      "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L3#S54": Object {
+        "default": "'111'",
+        "required": true,
+        "type": "number",
+      },
+      "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L4#S109": Object {
+        "default": "'222'",
+        "required": true,
+        "type": "number",
+      },
+      "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L5#S163": Object {
+        "default": "'333'",
+        "required": true,
+        "type": "number",
+      },
+      "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L6#S217": Object {
+        "default": "'333'",
+        "required": true,
+        "type": "string",
+      },
+    },
+    "ccc": Object {
+      "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L10#S380": Object {
+        "default": "'333'",
+        "required": true,
+        "type": "number",
+      },
+      "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L11#S434": Object {
+        "default": "'333'",
+        "required": true,
+        "type": "string",
+      },
+      "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L8#S271": Object {
+        "default": "'111'",
+        "required": true,
+        "type": "number",
+      },
+      "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L9#S326": Object {
+        "default": "'222'",
+        "required": true,
+        "type": "number",
+      },
+    },
+    "ddd": Object {
+      "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L13#S488": Object {
+        "required": false,
+        "type": "string",
+      },
+    },
+    "eee": Object {
+      "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L15#S506": Object {
+        "default": "''",
+        "required": false,
+        "type": "string",
+      },
+    },
+  },
+  "envNames": Array [
+    "bbb",
+    "ccc",
+    "ddd",
+    "eee",
+  ],
+  "exceptionReport": Array [
+    Object {
+      "envKey": "bbb",
+      "errors": Array [
+        "envKey: bbb has different types: number,string",
+      ],
+      "line": Array [
+        Object {
+          "errors": undefined,
+          "path": "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L3#S54",
+        },
+        Object {
+          "errors": undefined,
+          "path": "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L4#S109",
+        },
+        Object {
+          "errors": undefined,
+          "path": "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L5#S163",
+        },
+        Object {
+          "errors": undefined,
+          "path": "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L6#S217",
+        },
+      ],
+      "types": Array [
+        "number",
+        "string",
+      ],
+      "warnings": Array [
+        "envKey: bbb has different default value: '111','222','333'",
+      ],
+    },
+    Object {
+      "envKey": "ccc",
+      "errors": Array [
+        "envKey: ccc has different types: number,string",
+      ],
+      "line": Array [
+        Object {
+          "errors": undefined,
+          "path": "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L8#S271",
+        },
+        Object {
+          "errors": undefined,
+          "path": "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L9#S326",
+        },
+        Object {
+          "errors": undefined,
+          "path": "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L10#S380",
+        },
+        Object {
+          "errors": undefined,
+          "path": "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L11#S434",
+        },
+      ],
+      "types": Array [
+        "number",
+        "string",
+      ],
+      "warnings": Array [
+        "envKey: ccc has different default value: '111','222','333'",
+      ],
+    },
+    Object {
+      "envKey": "ddd",
+      "errors": Array [
+        "envKey: ddd has different types: string",
+      ],
+      "line": Array [
+        Object {
+          "errors": undefined,
+          "path": "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L13#S488",
+        },
+      ],
+      "types": Array [
+        "string",
+      ],
+      "warnings": Array [],
+    },
+    Object {
+      "envKey": "eee",
+      "errors": Array [
+        "envKey: eee has different types: string",
+      ],
+      "line": Array [
+        Object {
+          "errors": undefined,
+          "path": "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L15#S506",
+        },
+      ],
+      "types": Array [
+        "string",
+      ],
+      "warnings": Array [
+        "envKey: eee has different default value: ''",
+      ],
+    },
+  ],
+}
+`;

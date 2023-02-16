@@ -15,5 +15,5 @@ test('generate typeEnv call usage report', () => {
     sourceFilePath: kSourceFilePath,
     options: { tsConfigFilePath: kTsconfigPath },
   });
-  expect(info.envNames[0]).toBe('bbb');
+  expect(info).toMatchSnapshot();
 });

@@ -11,7 +11,7 @@ type TResult = {
 };
 
 type TFunCallArg = {
-  [secretKey in string]: { [path in string]: TResult };
+  [envKey in string]: { [path in string]: TResult };
 };
 
 export type Report = { sourceFilePath: string; options?: ProjectOptions };
@@ -64,7 +64,7 @@ const exceptionReport = (data: TFunCallArg) => {
       );
 
       if (types.length > 0) {
-        errors.push(`secretKey: ${r} has different types: ${types.join(',')}`);
+        errors.push(`envKey: ${r} has different types: ${types.join(',')}`);
       }
 
       const defaultValue = uniqBy(
@@ -74,7 +74,7 @@ const exceptionReport = (data: TFunCallArg) => {
 
       if (defaultValue.length > 0) {
         warnings.push(
-          `secretKey: ${r} has different default value: ${defaultValue.join(
+          `envKey: ${r} has different default value: ${defaultValue.join(
             ','
           )}`
         );
@@ -92,7 +92,7 @@ const exceptionReport = (data: TFunCallArg) => {
       }
 
       return {
-        secretKey: r,
+        envKey: r,
         types,
         line,
         errors,
@@ -113,7 +113,7 @@ const parseEnvInfo = (result: TParseParameters[][]) => {
       return acc;
     }
 
-    const secret = acc[value.secretKey];
+    const secret = acc[value.envKey];
 
     if (secret) {
       if (secret[value.path] == null) {
@@ -124,7 +124,7 @@ const parseEnvInfo = (result: TParseParameters[][]) => {
         };
       }
     } else {
-      acc[value.secretKey] = {
+      acc[value.envKey] = {
         [value.path]: {
           required: value.required,
           type: value.type,
@@ -157,14 +157,14 @@ const parseCallChaining = (args: TParseParameters[]) => {
     ["''", '""'].includes(typeEnvInfo.args[0])
   ) {
     // console.warn(
-    //   `not support secretKey is not \"\" or '' in ${typeEnvInfo.path}`
+    //   `not support envKey is not \"\" or '' in ${typeEnvInfo.path}`
     // );
 
     return;
   }
 
   // Remove the front and back quotation marks of the string
-  const secretKey: string = typeEnvInfo.args[0].substring(
+  const envKey: string = typeEnvInfo.args[0].substring(
     1,
     typeEnvInfo.args[0].length - 1
   );
@@ -201,7 +201,7 @@ const parseCallChaining = (args: TParseParameters[]) => {
   }
 
   return {
-    secretKey,
+    envKey,
     path: typeEnvInfo.path,
     required:
       (optionalInfoIndex === -1 && requiredInfoIndex !== -1) ||

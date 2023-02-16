@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`assignment generate env 1`] = `
+Array [
+  "aaa=",
+  "ccc=",
+  "eee=",
+]
+`;
+
+exports[`assignment generate env name 1`] = `
+Object {
+  "aaa": "aaa",
+  "ccc": "ccc",
+  "eee": "eee",
+}
+`;
+
+exports[`call chaining generate env 1`] = `
+Array [
+  "// default=['111','222','333']",
+  "bbb='111'",
+  "// default=['111','222','333']",
+  "ccc='111'",
+  "ddd=",
+  "// default=['']",
+  "eee=",
+]
+`;
+
+exports[`call chaining generate env name 1`] = `
+Object {
+  "bbb": "bbb",
+  "ccc": "ccc",
+  "ddd": "ddd",
+  "eee": "eee",
+}
+`;
