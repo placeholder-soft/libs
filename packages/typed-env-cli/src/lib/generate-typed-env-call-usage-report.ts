@@ -1,4 +1,4 @@
-import { ProjectOptions } from 'ts-morph';
+import { CompilerOptionsContainer, ProjectOptions, ts } from 'ts-morph';
 import { generateCallUsageReport } from './function-call/generate-call-usage-report';
 import { TParseParameters } from './function-call/types';
 import { uniqBy } from './utils/util';
@@ -35,8 +35,11 @@ export function generateTypedEnvCallUsageReport({
       'toInt',
       'toBoolean',
     ],
-    convertData: (data: TParseParameters[][]) => {
-      const result = parseEnvInfo(data);
+    convertData: (
+      data: TParseParameters[][],
+      { compilerOptions }: { compilerOptions: ts.CompilerOptions }
+    ) => {
+      const result = parseEnvInfo(data, compilerOptions);
       const exceptionResult = exceptionReport(result);
       return {
         envNames: Object.keys(result),
@@ -74,9 +77,7 @@ const exceptionReport = (data: TFunCallArg) => {
 
       if (defaultValue.length > 0) {
         warnings.push(
-          `envKey: ${r} has different default value: ${defaultValue.join(
-            ','
-          )}`
+          `envKey: ${r} has different default value: ${defaultValue.join(',')}`
         );
       }
 
@@ -102,12 +103,15 @@ const exceptionReport = (data: TFunCallArg) => {
     .filter((r) => r != null);
 };
 
-const parseEnvInfo = (result: TParseParameters[][]) => {
+const parseEnvInfo = (
+  result: TParseParameters[][],
+  compilerOptions: ts.CompilerOptions
+) => {
   return result.reduce<TFunCallArg>((acc, cur) => {
     if (cur == null) {
       return acc;
     }
-    const value = parseCallChaining(cur);
+    const value = parseCallChaining(cur, compilerOptions);
 
     if (value == null) {
       return acc;
@@ -136,7 +140,10 @@ const parseEnvInfo = (result: TParseParameters[][]) => {
   }, {});
 };
 
-const parseCallChaining = (args: TParseParameters[]) => {
+const parseCallChaining = (
+  args: TParseParameters[],
+  compilerOptions: ts.CompilerOptions
+) => {
   const typeEnvInfo = args.find((r) => r.funcName === 'typedEnv');
 
   if (typeEnvInfo == null) {
@@ -202,7 +209,10 @@ const parseCallChaining = (args: TParseParameters[]) => {
 
   return {
     envKey,
-    path: typeEnvInfo.path,
+    path: typeEnvInfo.path.replace(
+      new RegExp(`^${compilerOptions.rootDir}`, 'g'),
+      ''
+    ),
     required:
       (optionalInfoIndex === -1 && requiredInfoIndex !== -1) ||
       optionalInfoIndex > requiredInfoIndex,

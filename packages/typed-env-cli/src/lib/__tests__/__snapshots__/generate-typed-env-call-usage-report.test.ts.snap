@@ -4,57 +4,57 @@ exports[`generate typeEnv call usage report 1`] = `
 Object {
   "data": Object {
     "bbb": Object {
-      "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L3#S54": Object {
+      "/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L3#S54": Object {
         "default": "'111'",
         "required": true,
         "type": "number",
       },
-      "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L4#S109": Object {
+      "/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L4#S109": Object {
         "default": "'222'",
         "required": true,
         "type": "number",
       },
-      "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L5#S163": Object {
+      "/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L5#S163": Object {
         "default": "'333'",
         "required": true,
         "type": "number",
       },
-      "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L6#S217": Object {
+      "/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L6#S217": Object {
         "default": "'333'",
         "required": true,
         "type": "string",
       },
     },
     "ccc": Object {
-      "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L10#S380": Object {
+      "/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L10#S380": Object {
         "default": "'333'",
         "required": true,
         "type": "number",
       },
-      "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L11#S434": Object {
+      "/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L11#S434": Object {
         "default": "'333'",
         "required": true,
         "type": "string",
       },
-      "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L8#S271": Object {
+      "/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L8#S271": Object {
         "default": "'111'",
         "required": true,
         "type": "number",
       },
-      "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L9#S326": Object {
+      "/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L9#S326": Object {
         "default": "'222'",
         "required": true,
         "type": "number",
       },
     },
     "ddd": Object {
-      "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L13#S488": Object {
+      "/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L13#S488": Object {
         "required": false,
         "type": "string",
       },
     },
     "eee": Object {
-      "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L15#S506": Object {
+      "/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L15#S506": Object {
         "default": "''",
         "required": false,
         "type": "string",
@@ -76,19 +76,19 @@ Object {
       "line": Array [
         Object {
           "errors": undefined,
-          "path": "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L3#S54",
+          "path": "/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L3#S54",
         },
         Object {
           "errors": undefined,
-          "path": "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L4#S109",
+          "path": "/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L4#S109",
         },
         Object {
           "errors": undefined,
-          "path": "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L5#S163",
+          "path": "/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L5#S163",
         },
         Object {
           "errors": undefined,
-          "path": "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L6#S217",
+          "path": "/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L6#S217",
         },
       ],
       "types": Array [
@@ -107,19 +107,19 @@ Object {
       "line": Array [
         Object {
           "errors": undefined,
-          "path": "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L8#S271",
+          "path": "/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L8#S271",
         },
         Object {
           "errors": undefined,
-          "path": "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L9#S326",
+          "path": "/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L9#S326",
         },
         Object {
           "errors": undefined,
-          "path": "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L10#S380",
+          "path": "/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L10#S380",
         },
         Object {
           "errors": undefined,
-          "path": "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L11#S434",
+          "path": "/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L11#S434",
         },
       ],
       "types": Array [
@@ -138,7 +138,7 @@ Object {
       "line": Array [
         Object {
           "errors": undefined,
-          "path": "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L13#S488",
+          "path": "/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L13#S488",
         },
       ],
       "types": Array [
@@ -154,7 +154,7 @@ Object {
       "line": Array [
         Object {
           "errors": undefined,
-          "path": "/Users/pankai/projects/company/PlaceholderSoft/libs/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L15#S506",
+          "path": "/packages/typed-env-cli/src/lib/__fixtures__/usage-typed-env.ts#L15#S506",
         },
       ],
       "types": Array [
