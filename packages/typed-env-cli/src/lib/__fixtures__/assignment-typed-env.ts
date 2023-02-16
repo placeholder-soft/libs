@@ -62,3 +62,44 @@ switch (typedEnv('swticch')){
 do {
   typedEnv('do');
 } while (typedEnv('while'));
+
+
+while (typedEnv('while');) {
+  typedEnv('while-block');
+}
+
+for (let i = typedEnv('for-let'); i < 9; i++) {
+  typedEnv('for-let-block')
+}
+
+const object = { a: 1, b: 2, c: 3 };
+
+for (const property in object) {
+  typedEnv('for-in')
+}
+
+const array1 = ['a', 'b', 'c'];
+
+for (const element of array1) {
+  typedEnv('for-of')
+}
+
+function fun(fun: string = typedEnv('fun-arg')) {
+  typedEnv('fun-block');
+
+  return typedEnv('fun-return');
+}
+
+try {
+  typedEnv('try');
+} catch(e){
+  typedEnv('catch');
+}
+
+function useThrow() {
+    throw new Error(typedEnv('throw').toString());
+}
+
+with (typedEnv('with')) {
+  typedEnv('with-block')
+}

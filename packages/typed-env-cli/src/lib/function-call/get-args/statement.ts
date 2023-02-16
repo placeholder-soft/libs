@@ -40,6 +40,7 @@ function allSingleStatment(source: TSource): TStatement[] {
     ...source.getDescendantsOfKind(SyntaxKind.ThrowStatement),
     ...source.getDescendantsOfKind(SyntaxKind.TryStatement),
     ...source.getDescendantsOfKind(SyntaxKind.DebuggerStatement),
+    ...source.getDescendantsOfKind(SyntaxKind.FunctionDeclaration),
   ];
 }
 

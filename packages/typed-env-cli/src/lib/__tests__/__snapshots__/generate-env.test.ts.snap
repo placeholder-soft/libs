@@ -22,6 +22,19 @@ Array [
   "else-block=",
   "swticch-case-block=",
   "swticch-case-2-block=",
+  "while-block=",
+  "for-let-block=",
+  "for-in=",
+  "for-of=",
+  "fun-block=",
+  "try=",
+  "catch=",
+  "with-block=",
+  "for-let=",
+  "fun-return=",
+  "with=",
+  "throw=",
+  "fun-arg=",
 ]
 `;
 
@@ -33,11 +46,19 @@ Object {
   "DOCKER_COMPOSE_POSTGRES_PORT": "DOCKER_COMPOSE_POSTGRES_PORT",
   "UNIWHALE_DB_NAME": "UNIWHALE_DB_NAME",
   "aaa": "aaa",
+  "catch": "catch",
   "ccc": "ccc",
   "do": "do",
   "else-block": "else-block",
   "elseif": "elseif",
   "elseif-block": "elseif-block",
+  "for-in": "for-in",
+  "for-let": "for-let",
+  "for-let-block": "for-let-block",
+  "for-of": "for-of",
+  "fun-arg": "fun-arg",
+  "fun-block": "fun-block",
+  "fun-return": "fun-return",
   "if": "if",
   "if-block": "if-block",
   "swticch": "swticch",
@@ -46,6 +67,32 @@ Object {
   "swticch-case-2-block": "swticch-case-2-block",
   "swticch-case-block": "swticch-case-block",
   "swticch-default-block": "swticch-default-block",
+  "throw": "throw",
+  "try": "try",
   "while": "while",
+  "while-block": "while-block",
+  "with": "with",
+  "with-block": "with-block",
+}
+`;
+
+exports[`call chaining generate env 1`] = `
+Array [
+  "// default=['111','222','333']",
+  "bbb='111'",
+  "// default=['111','222','333']",
+  "ccc='111'",
+  "ddd=",
+  "// default=['']",
+  "eee=",
+]
+`;
+
+exports[`call chaining generate env name 1`] = `
+Object {
+  "bbb": "bbb",
+  "ccc": "ccc",
+  "ddd": "ddd",
+  "eee": "eee",
 }
 `;
