@@ -1,6 +1,7 @@
 import { Command, Flags } from '@oclif/core';
 import { generateTypedEnvCallUsageReport } from '../lib/generate-typed-env-call-usage-report';
 import { outputFile } from '../lib/utils/fs';
+import { loading } from '../utils/utils';
 
 export default class GenTypedEnvCallUsageReport extends Command {
   static override description = 'Generate typed-env call usage report';
@@ -31,6 +32,8 @@ export default class GenTypedEnvCallUsageReport extends Command {
   async run(): Promise<void> {
     const { flags } = await this.parse(GenTypedEnvCallUsageReport);
 
+    const timer = loading('Generating typed-env call usage report');
+
     const info = generateTypedEnvCallUsageReport({
       sourceFilePath: flags['source-file'],
       options: { tsConfigFilePath: flags.tsconfig },
@@ -41,5 +44,7 @@ export default class GenTypedEnvCallUsageReport extends Command {
     } else {
       console.log(info);
     }
+
+    timer.stop();
   }
 }
