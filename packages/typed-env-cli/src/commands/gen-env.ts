@@ -1,6 +1,7 @@
 import { Command, Flags } from '@oclif/core';
 import { outputFile } from '../lib/utils/fs';
 import { generateEnvByTypedEnv } from '../lib/generate-env';
+import { loading } from '../utils/utils';
 
 export default class GenEnvByTypedEnv extends Command {
   static override description = 'Generate .env by typedEnv';
@@ -31,6 +32,8 @@ export default class GenEnvByTypedEnv extends Command {
   async run(): Promise<void> {
     const { flags } = await this.parse(GenEnvByTypedEnv);
 
+    const timer = loading('Generating .env by typedEnv');
+
     const info = generateEnvByTypedEnv({
       sourceFilePath: flags['source-file'],
       options: { tsConfigFilePath: flags.tsconfig },
@@ -41,5 +44,6 @@ export default class GenEnvByTypedEnv extends Command {
     } else {
       console.log(info);
     }
+    timer.stop();
   }
 }

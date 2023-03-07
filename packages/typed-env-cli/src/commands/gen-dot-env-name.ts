@@ -1,6 +1,7 @@
 import { Command, Flags } from '@oclif/core';
 import { generateDotEnvName } from '../lib/generate-env';
 import { outputFile } from '../lib/utils/fs';
+import { loading } from '../utils/utils';
 
 export default class GenDotEnvName extends Command {
   static override description = 'Generate .env name type definition';
@@ -25,6 +26,8 @@ export default class GenDotEnvName extends Command {
   async run(): Promise<void> {
     const { flags } = await this.parse(GenDotEnvName);
 
+    const timer = loading('Generating .env name type definition');
+
     const envNames = generateDotEnvName(flags['source-file']);
 
     const fileContent = `export const AllProjectEnvNames = ${JSON.stringify(
@@ -39,5 +42,7 @@ export type ProjectEnvName = keyof typeof AllProjectEnvNames;`;
     } else {
       console.log(fileContent);
     }
+
+    timer.stop();
   }
 }

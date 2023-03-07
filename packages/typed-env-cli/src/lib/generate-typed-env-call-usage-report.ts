@@ -1,4 +1,4 @@
-import { ProjectOptions } from 'ts-morph';
+import { CompilerOptionsContainer, ProjectOptions, ts } from 'ts-morph';
 import { generateCallUsageReport } from './function-call/generate-call-usage-report';
 import { TParseParameters } from './function-call/types';
 import { uniqBy } from './utils/util';
@@ -11,7 +11,7 @@ type TResult = {
 };
 
 type TFunCallArg = {
-  [secretKey in string]: { [path in string]: TResult };
+  [envKey in string]: { [path in string]: TResult };
 };
 
 export type Report = { sourceFilePath: string; options?: ProjectOptions };
@@ -35,8 +35,11 @@ export function generateTypedEnvCallUsageReport({
       'toInt',
       'toBoolean',
     ],
-    convertData: (data: TParseParameters[][]) => {
-      const result = parseEnvInfo(data);
+    convertData: (
+      data: TParseParameters[][],
+      { compilerOptions }: { compilerOptions: ts.CompilerOptions }
+    ) => {
+      const result = parseEnvInfo(data, compilerOptions);
       const exceptionResult = exceptionReport(result);
       return {
         envNames: Object.keys(result),
@@ -64,7 +67,7 @@ const exceptionReport = (data: TFunCallArg) => {
       );
 
       if (types.length > 0) {
-        errors.push(`secretKey: ${r} has different types: ${types.join(',')}`);
+        errors.push(`envKey: ${r} has different types: ${types.join(',')}`);
       }
 
       const defaultValue = uniqBy(
@@ -74,9 +77,7 @@ const exceptionReport = (data: TFunCallArg) => {
 
       if (defaultValue.length > 0) {
         warnings.push(
-          `secretKey: ${r} has different default value: ${defaultValue.join(
-            ','
-          )}`
+          `envKey: ${r} has different default value: ${defaultValue.join(',')}`
         );
       }
 
@@ -92,7 +93,7 @@ const exceptionReport = (data: TFunCallArg) => {
       }
 
       return {
-        secretKey: r,
+        envKey: r,
         types,
         line,
         errors,
@@ -102,18 +103,21 @@ const exceptionReport = (data: TFunCallArg) => {
     .filter((r) => r != null);
 };
 
-const parseEnvInfo = (result: TParseParameters[][]) => {
+const parseEnvInfo = (
+  result: TParseParameters[][],
+  compilerOptions: ts.CompilerOptions
+) => {
   return result.reduce<TFunCallArg>((acc, cur) => {
     if (cur == null) {
       return acc;
     }
-    const value = parseCallChaining(cur);
+    const value = parseCallChaining(cur, compilerOptions);
 
     if (value == null) {
       return acc;
     }
 
-    const secret = acc[value.secretKey];
+    const secret = acc[value.envKey];
 
     if (secret) {
       if (secret[value.path] == null) {
@@ -124,7 +128,7 @@ const parseEnvInfo = (result: TParseParameters[][]) => {
         };
       }
     } else {
-      acc[value.secretKey] = {
+      acc[value.envKey] = {
         [value.path]: {
           required: value.required,
           type: value.type,
@@ -136,7 +140,10 @@ const parseEnvInfo = (result: TParseParameters[][]) => {
   }, {});
 };
 
-const parseCallChaining = (args: TParseParameters[]) => {
+const parseCallChaining = (
+  args: TParseParameters[],
+  compilerOptions: ts.CompilerOptions
+) => {
   const typeEnvInfo = args.find((r) => r.funcName === 'typedEnv');
 
   if (typeEnvInfo == null) {
@@ -157,14 +164,14 @@ const parseCallChaining = (args: TParseParameters[]) => {
     ["''", '""'].includes(typeEnvInfo.args[0])
   ) {
     // console.warn(
-    //   `not support secretKey is not \"\" or '' in ${typeEnvInfo.path}`
+    //   `not support envKey is not \"\" or '' in ${typeEnvInfo.path}`
     // );
 
     return;
   }
 
   // Remove the front and back quotation marks of the string
-  const secretKey: string = typeEnvInfo.args[0].substring(
+  const envKey: string = typeEnvInfo.args[0].substring(
     1,
     typeEnvInfo.args[0].length - 1
   );
@@ -201,8 +208,11 @@ const parseCallChaining = (args: TParseParameters[]) => {
   }
 
   return {
-    secretKey,
-    path: typeEnvInfo.path,
+    envKey,
+    path: typeEnvInfo.path.replace(
+      new RegExp(`^${compilerOptions.rootDir}`, 'g'),
+      ''
+    ),
     required:
       (optionalInfoIndex === -1 && requiredInfoIndex !== -1) ||
       optionalInfoIndex > requiredInfoIndex,

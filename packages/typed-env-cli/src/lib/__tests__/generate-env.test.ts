@@ -1,32 +1,66 @@
-import { existsSync } from 'fs';
 import path from 'path';
-import { generateEnv, generateEnvName } from '../generate-env';
+import {
+  generateEnvByTypedEnv,
+  generateEnvNameByTypedEnv,
+} from '../generate-env';
 
-const kSourceFilePath = path.resolve(
-  __dirname,
-  '../__fixtures__/usage-typed-env.ts'
-);
-const kTsconfigPath = path.resolve(
-  __dirname,
-  '../__fixtures__/tsconfig.t.json'
-);
+describe('call chaining', () => {
+  const kSourceFilePath = path.resolve(
+    __dirname,
+    '../__fixtures__/usage-typed-env.ts'
+  );
+  const kTsconfigPath = path.resolve(
+    __dirname,
+    '../__fixtures__/tsconfig.t.json'
+  );
 
-test('generate env name', () => {
-  const envNames = generateEnvName({
-    sourceFilePath: kSourceFilePath,
-    options: {
-      tsConfigFilePath: kTsconfigPath,
-    },
+  test('generate env name', () => {
+    const envNames = generateEnvNameByTypedEnv({
+      sourceFilePath: kSourceFilePath,
+      options: {
+        tsConfigFilePath: kTsconfigPath,
+      },
+    });
+    expect(envNames).toMatchSnapshot();
   });
-  console.log(envNames);
+
+  test('generate env', () => {
+    const env = generateEnvByTypedEnv({
+      sourceFilePath: kSourceFilePath,
+      options: {
+        tsConfigFilePath: kTsconfigPath,
+      },
+    });
+    expect(env).toMatchSnapshot();
+  });
 });
 
-test('generate env', () => {
-  const env = generateEnv({
-    sourceFilePath: kSourceFilePath,
-    options: {
-      tsConfigFilePath: kTsconfigPath,
-    },
+describe('assignment', () => {
+  const kSourceFilePath = path.resolve(
+    __dirname,
+    '../__fixtures__/assignment-typed-env.ts'
+  );
+  const kTsconfigPath = path.resolve(
+    __dirname,
+    '../__fixtures__/tsconfig.t.json'
+  );
+  test('generate env name', () => {
+    const envNames = generateEnvNameByTypedEnv({
+      sourceFilePath: kSourceFilePath,
+      options: {
+        tsConfigFilePath: kTsconfigPath,
+      },
+    });
+    expect(envNames).toMatchSnapshot();
   });
-  console.log(env);
+
+  test('generate env', () => {
+    const env = generateEnvByTypedEnv({
+      sourceFilePath: kSourceFilePath,
+      options: {
+        tsConfigFilePath: kTsconfigPath,
+      },
+    });
+    expect(env).toMatchSnapshot();
+  });
 });

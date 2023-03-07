@@ -1,17 +1,63 @@
 import {
   Block,
   CallExpression,
-  ExpressionStatement,
   ProjectOptions,
   SourceFile,
   ts,
+  EmptyStatement,
+  VariableStatement,
+  ExpressionStatement,
+  IfStatement,
+  DoStatement,
+  WhileStatement,
+  ForStatement,
+  ForInStatement,
+  ForOfStatement,
+  ContinueStatement,
+  BreakStatement,
+  ReturnStatement,
+  WithStatement,
+  SwitchStatement,
+  LabeledStatement,
+  ThrowStatement,
+  TryStatement,
+  DebuggerStatement,
+  TemplateSpan,
+  CaseClause,
+  DefaultClause,
+  FunctionDeclaration,
 } from 'ts-morph';
 
-export type TSource =
+export type TStatement =
+  | EmptyStatement
+  | VariableStatement
+  | ExpressionStatement
+  | IfStatement
+  | DoStatement
+  | WhileStatement
+  | ForStatement
+  | ForInStatement
+  | ForOfStatement
+  | ContinueStatement
+  | BreakStatement
+  | ReturnStatement
+  | WithStatement
+  | SwitchStatement
+  | LabeledStatement
+  | ThrowStatement
+  | TryStatement
+  | DebuggerStatement
+  | FunctionDeclaration;
+
+export type TSingleSource =
   | SourceFile
   | Block
-  | ExpressionStatement
-  | CallExpression<ts.CallExpression>;
+  | CallExpression<ts.CallExpression>
+  | TemplateSpan
+  | CaseClause
+  | DefaultClause;
+
+export type TSource = TStatement | TSingleSource;
 
 export type TParseParameters = {
   /**
@@ -90,7 +136,12 @@ export type TGenerateCallUsageReport<T> = TGenerateCallUsageReportBase & {
    * @param v call usage args
    * @returns data
    */
-  convertData: (v: TParseParameters[][]) => T;
+  convertData: (
+    v: TParseParameters[][],
+    opt: {
+      compilerOptions: ts.CompilerOptions;
+    }
+  ) => T;
 };
 
 /**

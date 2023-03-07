@@ -3,7 +3,7 @@ import { TGetArgsFromExpression, TParseParameters } from '../types';
 
 export function getArgsFromCall(
   args: TGetArgsFromExpression
-): TParseParameters[] | undefined {
+): TParseParameters[] {
   const { source, filePath, chainCallFuncNames } = args;
 
   const calls = source.getDescendantsOfKind(SyntaxKind.CallExpression);
@@ -11,38 +11,52 @@ export function getArgsFromCall(
   const argsInfo: TParseParameters[] = [];
 
   for (const c of calls) {
-    const pe = c.getExpressionIfKind(SyntaxKind.PropertyAccessExpression);
+    const result = getArgsFromOneCall({
+      source: c,
+      filePath,
+      chainCallFuncNames,
+    });
 
-    const peName = pe?.getName();
-
-    if (peName && chainCallFuncNames.includes(peName)) {
-      argsInfo.push(
-        generateArgINfo({
-          filePath,
-          funcName: peName,
-          source: c,
-        })
-      );
-      continue;
-    }
-
-    const identifierText = c
-      .getExpressionIfKind(SyntaxKind.Identifier)
-      ?.getText();
-
-    if (identifierText && chainCallFuncNames.includes(identifierText)) {
-      argsInfo.push(
-        generateArgINfo({
-          filePath,
-          funcName: identifierText,
-          source: c,
-        })
-      );
-    }
+    result && argsInfo.push(result);
   }
 
-  if (argsInfo.length > 0) {
-    return argsInfo;
+  return argsInfo;
+}
+
+export function getArgsFromOneCall({
+  source,
+  filePath,
+  chainCallFuncNames,
+}: {
+  source?: CallExpression<ts.CallExpression>;
+  chainCallFuncNames: string[];
+  filePath: string;
+}): TParseParameters | undefined {
+  if (!source) {
+    return;
+  }
+  const pe = source.getExpressionIfKind(SyntaxKind.PropertyAccessExpression);
+
+  const peName = pe?.getName();
+
+  if (peName && chainCallFuncNames.includes(peName)) {
+    return generateArgINfo({
+      filePath,
+      funcName: peName,
+      source,
+    });
+  }
+
+  const identifierText = source
+    .getExpressionIfKind(SyntaxKind.Identifier)
+    ?.getText();
+
+  if (identifierText && chainCallFuncNames.includes(identifierText)) {
+    return generateArgINfo({
+      filePath,
+      funcName: identifierText,
+      source,
+    });
   }
 }
 
