@@ -8,24 +8,22 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true,
-    "allowJs": false,
     "esModuleInterop": true,
-    "preserveConstEnums": true,
-    "preserveWatchOutput": true,
     "importHelpers": true,
-    "target": "es2015",
+    "target": "esnext",
     "module": "esnext",
-    "lib": ["es2017", "dom"],
+    "lib": ["esnext", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
+    "noImplicitAny": true,
     "baseUrl": ".",
     "paths": {
       "@placeholdersoft/bigquery": ["packages/bigquery/src/index.ts"],
       "@placeholdersoft/helpers": ["packages/helpers/src/index.ts"],
       "@placeholdersoft/typed-env": ["packages/typed-env/src/index.ts"],
       "@placeholdersoft/typed-env-cli": ["packages/typed-env-cli/src/index.ts"]
-    }
+    },
+    "typeRoots": ["node_modules/@types", "types"]
   },
   "exclude": ["node_modules", "tmp"]
 }
