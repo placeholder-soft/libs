@@ -1,6 +1,9 @@
 import path from 'path';
 import { BigQueryStore } from '../bigquery-store';
-import { getBigQuerySchemaByTikTok } from '../__fixtures__/tiktok-models';
+import {
+  getBigQuerySchemaByTikTok,
+  TikTokPageModels,
+} from '../__fixtures__/tiktok-models';
 
 const keyFilename = path.resolve(
   __dirname,
@@ -12,7 +15,7 @@ const datasetId = 'tiktok_appstore';
 
 describe('BigQueryStore', () => {
   test('create dataset', () => {
-    const store = new BigQueryStore(
+    const store = new BigQueryStore<TikTokPageModels>(
       {
         projectId,
         keyFilename,
@@ -22,5 +25,10 @@ describe('BigQueryStore', () => {
     );
 
     store.ensureDataset();
+
+    store.insertRows('topic', {
+      data: [],
+    });
+    // const rows = store.query('');
   });
 });

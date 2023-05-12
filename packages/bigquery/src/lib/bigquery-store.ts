@@ -6,11 +6,11 @@ import type {
 
 export class BigQueryStore<
   U extends { [key: string]: U[keyof U] },
-  T extends string
+  T extends Extract<keyof U, string> = Extract<keyof U, string>
 > {
   readonly bq: bigquery.BigQuery;
   constructor(
-    private readonly config: { projectId: string; keyFilename?: string },
+    private readonly config: bigquery.BigQueryOptions,
     private readonly datasetId: string,
     private readonly getBigQuerySchema: (
       tableName: T
@@ -117,6 +117,7 @@ export class BigQueryStore<
     const [job] = await this.bq.createQueryJob(options);
 
     const [rows] = await job.getQueryResults();
+
     return rows as U[T];
   };
 }
