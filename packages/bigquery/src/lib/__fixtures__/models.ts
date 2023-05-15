@@ -30,6 +30,8 @@ export type YouTuBePage = keyof typeof kYouTuBePages;
 
 const YouTuBeChannelPageModel = z.object({
   channelId: z.string(),
+  created_at: z.coerce.date(),
+  updated_at: z.coerce.date(),
 });
 
 export type YouTuBeChannelPageModel = z.infer<typeof YouTuBeChannelPageModel>;

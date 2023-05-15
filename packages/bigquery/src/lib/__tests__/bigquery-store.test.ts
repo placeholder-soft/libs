@@ -26,10 +26,12 @@ describe('BigQueryStore', () => {
 
     jest.setTimeout(10000);
 
-    const aaa = await store.queryTable('videos', {
-      selectedFields: 'title'
-    });
-    console.log(aaa.length);
+    await store.ensureTable('channel');
+
+    // const aaa = await store.queryTable('channel', {
+    //   selectedFields: 'channelId'
+    // });
+    // console.log(aaa);
     // store.ensureDataset();
 
     // store.insertRows('topic', {

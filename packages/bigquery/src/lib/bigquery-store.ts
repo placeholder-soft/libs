@@ -4,6 +4,7 @@ import type {
   TableMetadata,
   GetRowsOptions,
 } from '@google-cloud/bigquery/build/src/table';
+import type { Query } from '@google-cloud/bigquery/build/src/bigquery';
 
 export class BigQueryStore<
   U extends { [key: string]: U[keyof U] },
@@ -115,13 +116,12 @@ export class BigQueryStore<
     return rows;
   };
 
-  readonly query = async (sql: string) => {
-    const options = {
+  readonly query = async (sql: string, options?: Query) => {
+    const [job] = await this.bq.createQueryJob({
       query: sql,
       location: 'US',
-    };
-
-    const [job] = await this.bq.createQueryJob(options);
+      ...options,
+    });
 
     const [rows] = await job.getQueryResults();
 
