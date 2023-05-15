@@ -101,6 +101,7 @@ export class BigQueryStore<
     tableName: T,
     rows:
       | U[T]
+      | U[T][]
       | {
           insertId: string;
           json: U[T];
