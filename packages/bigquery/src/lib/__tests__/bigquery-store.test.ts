@@ -1,34 +1,44 @@
 import path from 'path';
 import { BigQueryStore } from '../bigquery-store';
 import {
-  getBigQuerySchemaByTikTok,
-  TikTokPageModels,
-} from '../__fixtures__/tiktok-models';
+  getBigQuerySchemaByYouTuBe,
+  YouTuBePageModels,
+} from '../__fixtures__/models';
 
 const keyFilename = path.resolve(
   __dirname,
-  '../__fixtures__/shopify-cloud-0-55a469e24366.json'
+  '../__fixtures__/gcr-key-file.json'
 );
 
 const projectId = 'shopify-cloud-0';
-const datasetId = 'tiktok_appstore';
+const datasetId = 'crawler';
 
 describe('BigQueryStore', () => {
-  test('create dataset', () => {
-    const store = new BigQueryStore<TikTokPageModels>(
+  test('create dataset', async () => {
+    const store = new BigQueryStore<YouTuBePageModels>(
       {
         projectId,
         keyFilename,
       },
       datasetId,
-      getBigQuerySchemaByTikTok
+      getBigQuerySchemaByYouTuBe
     );
 
-    store.ensureDataset();
+    jest.setTimeout(10000);
 
-    store.insertRows('topic', {
-      data: [],
+    const aaa = await store.queryTable('videos', {
+      selectedFields: 'title'
     });
-    // const rows = store.query('');
+    console.log(aaa.length);
+    // store.ensureDataset();
+
+    // store.insertRows('topic', {
+    //   data: [],
+    // });
+    // const rows = await store.query(`
+    // select * from crawler.videos limit 2
+    // `);
+
+    // console.log(rows);
   });
 });

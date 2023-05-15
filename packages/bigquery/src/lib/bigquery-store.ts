@@ -2,6 +2,7 @@ import * as bigquery from '@google-cloud/bigquery';
 import type {
   InsertRowsOptions,
   TableMetadata,
+  GetRowsOptions,
 } from '@google-cloud/bigquery/build/src/table';
 
 export class BigQueryStore<
@@ -108,6 +109,12 @@ export class BigQueryStore<
     return await (await this.ensureTable(tableName)).insert(rows, options);
   };
 
+  readonly queryTable = async (tableName: T, options?: GetRowsOptions) => {
+    const table = await this.ensureTable(tableName);
+    const [rows] = await table.getRows(options);
+    return rows;
+  };
+
   readonly query = async (sql: string) => {
     const options = {
       query: sql,
@@ -118,6 +125,6 @@ export class BigQueryStore<
 
     const [rows] = await job.getQueryResults();
 
-    return rows as U[T];
+    return rows;
   };
 }
